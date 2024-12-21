@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Modern Node.js App</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">NodeApp</div>
+            <div class="nav-links">
+                <a href="/" class="active">Home</a>
+                <a href="/health">Health</a>
+                <a href="https://github.com/ysakols" target="_blank">GitHub</a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <div class="hero">
+                <h1 class="title">Welcome to Your Node.js App</h1>
+                <p class="subtitle">A modern, secure, and scalable web application</p>
+                <div class="time-display">
+                    <div class="time-card">
+                        <span class="time-label">Current Time</span>
+                        <span class="time-value"><%= currentTime %></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure</h3>
+                    <p>Built with security best practices</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡️</div>
+                    <h3>Fast</h3>
+                    <p>Optimized for performance</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive</h3>
+                    <p>Works on all devices</p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p> 2023 NodeApp. Built with Express.js</p>
+        </footer>
+    </div>
+</body>
+</html>
