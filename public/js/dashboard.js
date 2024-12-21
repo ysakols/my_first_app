@@ -55,7 +55,33 @@ document.addEventListener('DOMContentLoaded', function() {
 // Paragon Event Handlers
 function handleConnection(connection) {
     console.log('Successfully connected:', connection);
-    showToast('Successfully connected to ' + connection.integration);
+    
+    // Extract the token from the connection object
+    const token = connection.token; // Ensure this is the correct property name
+    
+    // Send the token to your backend
+    fetch('http://localhost:3333/auth/google/callback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}` // Include the token in the Authorization header
+        },
+        body: JSON.stringify({ token }) // Send the token in the request body if needed
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Response from backend:', data);
+        if (data.success) {
+            showToast('Successfully authenticated!');
+        } else {
+            showToast('Authentication failed: ' + data.error, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error sending token to backend:', error);
+        showToast('Error sending token: ' + error.message, 'error');
+    });
+    
     updateConnectionStatus(true, connection.integration);
 }
 
@@ -205,7 +231,8 @@ async function generateDocumentation() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(values)
+            body: JSON.stringify(values),
+            credentials: 'include'
         });
 
         if (!response.ok) {
