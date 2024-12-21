@@ -12,6 +12,13 @@
         <nav class="navbar">
             <div class="logo">NodeApp</div>
             <div class="nav-links">
+                <% if (isAuthenticated) { %>
+                    <a href="/dashboard" class="nav-link">Dashboard</a>
+                    <button onclick="logout()" class="nav-link logout-btn">Logout</button>
+                <% } else { %>
+                    <a href="/login" class="nav-link">Login</a>
+                    <a href="/register" class="nav-link">Register</a>
+                <% } %>
                 <a href="/" class="active">Home</a>
                 <a href="/health">Health</a>
                 <a href="https://github.com/ysakols" target="_blank">GitHub</a>
@@ -47,11 +54,39 @@
                     <p>Works on all devices</p>
                 </div>
             </div>
+            
+            <% if (!isAuthenticated) { %>
+                <div class="cta-buttons">
+                    <a href="/register" class="cta-button primary">Get Started</a>
+                    <a href="/login" class="cta-button secondary">Sign In</a>
+                </div>
+            <% } else { %>
+                <div class="cta-buttons">
+                    <a href="/dashboard" class="cta-button primary">Go to Dashboard</a>
+                </div>
+            <% } %>
         </main>
 
         <footer class="footer">
             <p> 2023 NodeApp. Built with Express.js</p>
         </footer>
     </div>
+
+    <script>
+        async function logout() {
+            try {
+                const response = await fetch('/auth/logout', {
+                    method: 'POST',
+                    credentials: 'same-origin'
+                });
+
+                if (response.ok) {
+                    window.location.href = '/login';
+                }
+            } catch (error) {
+                console.error('Logout failed:', error);
+            }
+        }
+    </script>
 </body>
 </html>

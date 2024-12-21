@@ -8,17 +8,22 @@ const limiter = rateLimit({
 });
 
 // Security headers
-const securityHeaders = (req, res, next) => {
-    res.setHeader('X-Content-Type-Options', 'nosniff');
-    res.setHeader('X-Frame-Options', 'DENY');
-    res.setHeader('X-XSS-Protection', '1; mode=block');
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-    next();
-};
+const securityHeaders = helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://accounts.google.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            imgSrc: ["'self'", "https://accounts.google.com"],
+            connectSrc: ["'self'", "https://accounts.google.com"],
+            frameSrc: ["'self'", "https://accounts.google.com"],
+        },
+    },
+});
 
 // Export middleware array
 module.exports = [
-    helmet(),
-    limiter,
-    securityHeaders
+    securityHeaders,
+    limiter
 ];

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation Generator | Dashboard</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <script src="https://unpkg.com/@paragon-os/connect"></script>
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="logo">DocGen</div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">Home</a>
+                <a href="https://github.com/ysakols" target="_blank" class="nav-link">GitHub</a>
+            </div>
+        </nav>
+
+        <div class="main-content">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+                <button class="tab-btn" data-tab="review">Review</button>
+                <button class="tab-btn" data-tab="preview">Preview</button>
+            </div>
+
+            <div class="tab-content active" id="dashboard">
+                <div class="connect-section">
+                    <h2>Connect Your Data Sources</h2>
+                    <p>Connect your third-party resources to generate documentation</p>
+                    <button id="paragonConnect" class="connect-btn">Connect Resources</button>
+                </div>
+
+                <div class="prompt-section">
+                    <h2>Documentation Prompts</h2>
+                    <div class="prompt-inputs">
+                        <div class="input-group">
+                            <label for="projectName">Project Name</label>
+                            <input type="text" id="projectName" placeholder="Enter project name">
+                        </div>
+                        <div class="input-group">
+                            <label for="description">Project Description</label>
+                            <textarea id="description" placeholder="Describe your project"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="audience">Target Audience</label>
+                            <input type="text" id="audience" placeholder="Who is this documentation for?">
+                        </div>
+                        <div class="input-group">
+                            <label for="style">Documentation Style</label>
+                            <select id="style">
+                                <option value="technical">Technical</option>
+                                <option value="conversational">Conversational</option>
+                                <option value="tutorial">Tutorial-based</option>
+                            </select>
+                        </div>
+                        <button id="generate" class="generate-btn">Generate Documentation</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="review">
+                <div class="review-section">
+                    <h2>Review Generated Documentation</h2>
+                    <div class="review-content">
+                        <div id="docPreview" class="doc-preview">
+                            <!-- Generated content will be inserted here -->
+                        </div>
+                        <div class="review-actions">
+                            <button class="edit-btn">Edit</button>
+                            <button class="approve-btn">Approve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="preview">
+                <div class="preview-section">
+                    <h2>Final Documentation Preview</h2>
+                    <div class="preview-actions">
+                        <button class="export-btn">Export</button>
+                        <select class="format-select">
+                            <option value="markdown">Markdown</option>
+                            <option value="pdf">PDF</option>
+                            <option value="html">HTML</option>
+                        </select>
+                    </div>
+                    <div id="finalPreview" class="final-preview">
+                        <!-- Final formatted content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
